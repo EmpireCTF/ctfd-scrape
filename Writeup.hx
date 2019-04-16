@@ -1,10 +1,10 @@
 using StringTools;
 
 class Writeup {
-  public static function format(data:CTFd.CTFdData):String {
+  public static function format(data:CTF):String {
     var out = new StringBuf();
     formatHeader(out);
-    var catMap = new Map<String, Array<CTFd.CTFdChallenge>>();
+    var catMap = new Map<String, Array<CTF.CTFChallenge>>();
     for (c in data.challenges) {
       if (!catMap.exists(c.category)) catMap[c.category] = [];
       catMap[c.category].push(c);
@@ -29,7 +29,7 @@ class Writeup {
   static var allowed = "abcdefghijklmnopqrstuvwxyz0123456789_".split("");
   static function slug(s:String):String return s.toLowerCase().split("").filter(c -> allowed.indexOf(c) != -1).join("");
   
-  static function slugChallenge(chall:CTFd.CTFdChallenge):String return '${chall.value}-${slug(chall.category)}--${slug(chall.name)}';
+  static function slugChallenge(chall:CTF.CTFChallenge):String return '${chall.value}-${slug(chall.category)}--${slug(chall.name)}';
   
   static function formatToC(out:StringBuf, cats:CatMap):Void {
     out.add('## Challenges ##
@@ -106,4 +106,4 @@ class Writeup {
   }
 }
 
-typedef CatMap = Array<{category:String, challenges:Array<CTFd.CTFdChallenge>}>;
+typedef CatMap = Array<{category:String, challenges:Array<CTF.CTFChallenge>}>;
